@@ -2,10 +2,10 @@
 'use strict'
 
 const path = require('path')
-const cli = require('commander')
+const { program } = require('commander')
 const install = require('./src/install')
 
-cli
+program
   .command('install <input_strings...>')
   .alias('i')
   .option('-d, --clean', 'Remove node_modules first.')
@@ -14,17 +14,17 @@ cli
   .description('Install a given subset or multiple subsets defined in package.json.')
   .action(install)
 
-cli.command('config').action(() => {
+program.command('config').action(() => {
   const config = require('./src/config')
   const subsets = require(process.cwd() + '/package.json').subsets || config() || {}
   console.log(subsets)
 })
 
-cli.command('*').action(() => cli.help())
+program.command('*').action(() => program.help())
 
-cli.version(require('./package.json').version).parse(process.argv)
+program.version(require('./package.json').version).parse(process.argv)
 
-if (cli.args.length === 0) cli.help()
+if (program.args.length === 0) program.help()
 
 process.on('uncaughtException', (err) => {
   console.error('ERROR: ' + err)
