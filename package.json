@@ -1,6 +1,6 @@
 {
   "name": "install-subset-pkgs",
-  "version": "1.0.0-beta.0",
+  "version": "1.0.0-beta.1",
   "description": "Install a subset of npm dependencies based on given contexts",
   "main": "index.js",
   "bin": {
