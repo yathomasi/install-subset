@@ -109,6 +109,10 @@ module.exports = function install(input_strings, options) {
 
     // choose which installer to use, then spawn
     if (!options.npm && shelljs.which('yarn')) {
+      // allow immutable install
+      if(options.disableImmutableInstalls){
+        spawnSync('yarn', ['config', 'set', 'enableImmutableInstalls', 'false'], { stdio: 'inherit' })
+      }
       installer = spawnSync('yarn', ['install'], { stdio: 'inherit' })
     } else {
       installer = spawnSync('npm', ['install'], { stdio: 'inherit' })
